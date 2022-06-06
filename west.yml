@@ -1,0 +1,41 @@
+manifest:
+  self:
+    path: zephyr-lpc-app
+
+  defaults:
+    remote: upstream
+
+  remotes:
+    - name: upstream
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      revision: zephyr-v3.1.0
+      path: zephyr
+      west-commands: scripts/west-commands.yml
+
+    - name: cmsis
+      revision: 5f86244bad4ad5a590e084f0e72ba7a1416c2edf
+      path: modules/hal/cmsis
+      groups:
+        - hal
+
+    - name: hal_espressif
+      revision: df85671c5d0405c0747c2939c8dfe808b7e4cf38
+      path: modules/hal/espressif
+      west-commands: west/west-commands.yml
+      groups:
+        - hal
+
+    - name: hal_stm32
+      revision: 51b373cd3455b8c2b9babbf6ff41918116a442ac
+      path: modules/hal/stm32
+      groups:
+        - hal
+
+    - name: hal_xtensa
+      revision: 0e577021bb66e644afd067cd9f7c71ab11b62b3d
+      path: modules/hal/xtensa
+      groups:
+        - hal
