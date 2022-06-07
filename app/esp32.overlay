@@ -11,3 +11,18 @@
 		};
 	};
 };
+
+/ {
+     aliases {
+             sw0 = &button0;
+     };
+
+     buttons {
+             compatible = "gpio-keys";
+             button0: button_0 {
+                     gpios = < &gpio0 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+                     label = "User button";
+             };
+     };
+};
+
