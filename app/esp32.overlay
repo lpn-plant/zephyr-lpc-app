@@ -15,14 +15,30 @@
 / {
      aliases {
              sw0 = &button0;
+             pin2lclk = &gpio2lclk;
+             pin2lreset = &gpio2lreset;
+             pin2test = &gpio2test;
      };
 
      buttons {
              compatible = "gpio-keys";
              button0: button_0 {
-                     gpios = < &gpio0 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+                     gpios = < &gpio0 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW) >;
                      label = "User button";
+             };
+             gpio2lclk: lclk2pin {
+                     gpios = < &gpio0 7 GPIO_ACTIVE_HIGH>;
+                     label = "LPC protocol lclk";
+             };
+             gpio2lreset: lreset2pin {
+                     gpios = < &gpio0 6 GPIO_ACTIVE_LOW>;
+                     label = "LPC protocol lreset";
+             };
+             gpio2test: test2pin {
+                     gpios = < &gpio0 23 GPIO_ACTIVE_HIGH>;
+                     label = "LPC protocol clock test pin";
              };
      };
 };
+
 
