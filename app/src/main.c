@@ -100,14 +100,14 @@ void main(void)
 	}
 
 	ret = gpio_pin_interrupt_configure_dt(&button,
-					      GPIO_INT_EDGE_TO_ACTIVE);
+					      GPIO_INT_EDGE_FALLING);
 	if (ret != 0) {
 		printk("Error %d: failed to configure interrupt on %s pin %d\n",
 			ret, button.port->name, button.pin);
 		return;
 	}
     //---------------------------
-     
+/*   
 	if (!device_is_ready(pin_lclk.port)) {
 		printk("Error: button device %s is not ready\n",
 		       pin_lclk.port->name);
@@ -127,7 +127,7 @@ void main(void)
 		printk("Error %d: failed to configure interrupt on %s pin %d\n",
 			ret, pin_lclk.port->name, pin_lclk.pin);
 		return;
-	} 
+	}
     //---------------------------
 
 	if (!device_is_ready(pin_test.port)) {
@@ -142,18 +142,18 @@ void main(void)
 		       ret, pin_test.port->name, pin_lclk.pin);
 		return;
 	}
-
+*/
     //---------------------------
 
     //Callbacks from GPIO pins interrupts
-
+/*
 	gpio_init_callback(&pin_lclk_cb_data, lclk_detected, BIT(pin_lclk.pin));
 	gpio_add_callback(pin_lclk.port, &pin_lclk_cb_data);
 	printk("Set up callback at %s pin %d\n", pin_lclk.port->name, pin_lclk.pin);
     
-	gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));
-	gpio_add_callback(button.port, &button_cb_data);
-	printk("Set up callback at %s pin %d\n", button.port->name, button.pin);
+	//gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));
+	//gpio_add_callback(button.port, &button_cb_data);
+	//printk("Set up callback at %s pin %d\n", button.port->name, button.pin);
 
 	if (led.port && !device_is_ready(led.port)) {
 		printk("Error %d: LED device %s is not ready; ignoring it\n",
@@ -170,18 +170,16 @@ void main(void)
 			printk("Set up LED at %s pin %d\n", led.port->name, led.pin);
 		}
 	}
-
-    //gpio_pin_set_dt(&led, 1);
-
+*/
 	printk("Press the button\n");
 	if (led.port) {
 		while (1) {
 			/* If we have an LED, match its state to the button's. */
-			int val = gpio_pin_get_dt(&button);
+			//int val = gpio_pin_get_dt(&button);
 
-			if (val >= 0) {
-				gpio_pin_set_dt(&led, val);
-			}
+			//if (val >= 0) {
+			//	gpio_pin_set_dt(&led, val);
+			//}
 			k_msleep(SLEEP_TIME_MS);
 		}
 	}
